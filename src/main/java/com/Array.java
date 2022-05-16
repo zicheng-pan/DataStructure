@@ -105,14 +105,15 @@ public class Array<E> {
             throw new IllegalArgumentException("remove failed. Index is illegal.");
         }
         E temp = data[index];
-        for (int i = index; i < size; i++) {
+        // 这里需要注意边界问题，数组不能越界，所以可以使用 [index+1, size] 或者 [index, size-1] 的范围来进行计算
+        for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
         size--;
         // 非必要，为了优化JVM垃圾回收
         data[size] = null;
         // 进行缩容,并且避免复杂度震荡得问题
-        if (size == data.length / 4) resize(data.length / 2);
+        if (size == data.length / 4 && data.length / 2 != 0) resize(data.length / 2);
         return temp;
     }
 
@@ -133,6 +134,17 @@ public class Array<E> {
         while (find(e) != -1) {
             remove(find(e));
         }
+    }
+
+    /*
+    这里使用get方法是避免了对数组的边界 size - 1 是否>=0的判断，如果size=0的时候那么size-1就 = -1了，所以使用get方法为简练
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public E getFirst() {
+        return get(0);
     }
 
     private void resize(int newcapacity) {
