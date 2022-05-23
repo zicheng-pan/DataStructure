@@ -1,6 +1,4 @@
-package com;
-
-import java.util.Arrays;
+package com.array;
 
 public class DequeueWithSize<E> implements Queue<E> {
 
