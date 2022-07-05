@@ -24,7 +24,7 @@ public class MergeSort {
         int i = 0;
         int j = mid + 1 - l;
         for (int index = l; index <= r; index++) {
-            if (i > mid) {
+            if (i > mid - l) {
                 array[index] = temparray[j];
                 j = j + 1;
             } else if (j > r - l) {
@@ -40,11 +40,20 @@ public class MergeSort {
         }
     }
 
+    public static <E extends Comparable<E>> void sout(E[] array) {
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < array.length; i++) {
+            if (i == array.length - 1)
+                result.append(array[i]);
+            else
+                result.append(array[i] + ", ");
+        }
+        System.out.println(result.toString());
+    }
+
     public static void main(String[] args) {
         Integer[] array = new Integer[]{1, 2, 3, 4, 10, 6, 3, 2, 24, 12};
         MergeSort.sort(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
+        sout(array);
     }
 }
