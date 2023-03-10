@@ -75,4 +75,99 @@ public class LinkedListWithoutDummyHead<E> {
     public void addLast(E e) {
         add(size, e);
     }
+
+    /**
+     * 单向链表的反转
+     *
+     * @return
+     */
+    public LinkedListWithoutDummyHead reverse3() {
+        Node pre = null;
+        Node cur = head;
+        Node next = head.next;
+
+        while (true) {
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+            next = next.next;
+            if (next == null) {
+                cur.next = pre;
+                pre = cur;
+                this.head = pre;
+                return this;
+            }
+        }
+    }
+
+    public LinkedListWithoutDummyHead reverse4() {
+        Node pre = null;
+        Node cur = head;
+        Node next = head.next;
+
+        while (next != null) {
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+            next = next.next;
+        }
+        cur.next = pre;
+        pre = cur;
+        this.head = pre;
+        return this;
+    }
+
+    public LinkedListWithoutDummyHead reverse() {
+        Node pre = null;
+        Node cur = head;
+        Node next = head.next;
+
+        while (cur != null) {
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+            next = next.next;
+        }
+        cur.next = pre;
+        pre = cur;
+        this.head = pre;
+        return this;
+    }
+
+    public LinkedListWithoutDummyHead reverse2() {
+        Node pre = null;
+        Node cur = head;
+
+        while (cur != null) {
+            Node next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        this.head = pre;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (Node cur = head; cur != null; cur = cur.next) {
+            res.append(cur + "->");
+        }
+        res.append("NULL");
+        return res.toString();
+    }
+
+
+    public static void main(String[] args) {
+        LinkedListWithoutDummyHead<Integer> linkedListWithoutDummyHead = new LinkedListWithoutDummyHead<>();
+        linkedListWithoutDummyHead.addFirst(1);
+        linkedListWithoutDummyHead.addFirst(2);
+        linkedListWithoutDummyHead.addFirst(3);
+        linkedListWithoutDummyHead.addFirst(4);
+        linkedListWithoutDummyHead.addFirst(5);
+        System.out.println(linkedListWithoutDummyHead);
+        System.out.println(linkedListWithoutDummyHead.reverse());
+        System.out.println(linkedListWithoutDummyHead.reverse2());
+    }
 }

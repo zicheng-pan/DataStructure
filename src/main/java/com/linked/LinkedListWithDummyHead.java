@@ -141,13 +141,36 @@ public class LinkedListWithDummyHead<E> {
         return res.toString();
     }
 
+    /**
+     * 单向链表的反转
+     *
+     * @return
+     */
+    public Node reverse() {
+        Node head = this.dummyHead.next;
+        Node node = reverse_recurrence(head);
+        this.dummyHead.next = node;
+        return this.dummyHead;
+    }
+
+    public Node reverse_recurrence(Node node) {
+        if (node == null || node.next == null)
+            return node;
+        Node head = reverse_recurrence(node.next);
+        node.next.next = node;
+        node.next = null;
+        return head;
+    }
+
     public static void main(String[] args) {
         LinkedListWithDummyHead list = new LinkedListWithDummyHead();
         for (int i = 0; i < 5; i++) {
             list.addFirst(i);
-            System.out.println(list);
+//            System.out.println(list);
         }
         list.add(2, 666);
+        System.out.println(list);
+        list.reverse();
         System.out.println(list);
     }
 }
