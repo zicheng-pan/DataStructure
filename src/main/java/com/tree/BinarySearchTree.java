@@ -244,9 +244,9 @@ public class BinarySearchTree<E extends Comparable> {
                 (node.right != null && value.compareTo(node.right.value) == 0)) {
             return node;
         } else if (node.left != null && value.compareTo(node.value) < 0) {
-            return successor(node.left, value);
+            return predecessor(node.left, value);
         } else if (node.right != null && value.compareTo(node.value) > 0) {
-            return successor(node.right, value);
+            return predecessor(node.right, value);
         } else {
             throw new RuntimeException("not found " + value + " node item");
         }
