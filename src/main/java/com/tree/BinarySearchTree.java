@@ -233,6 +233,26 @@ public class BinarySearchTree<E extends Comparable> {
     }
 
 
+    /*
+        查找节点的前驱节点
+     */
+    public Node predecessor(Node node, E value) {
+        if (node == null)
+            return null;
+
+        if ((node.left != null && value.compareTo(node.left.value) == 0) ||
+                (node.right != null && value.compareTo(node.right.value) == 0)) {
+            return node;
+        } else if (node.left != null && value.compareTo(node.value) < 0) {
+            return successor(node.left, value);
+        } else if (node.right != null && value.compareTo(node.value) > 0) {
+            return successor(node.right, value);
+        } else {
+            throw new RuntimeException("not found " + value + " node item");
+        }
+    }
+
+
     public static void main(String[] args) {
         BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
         Random random = new Random();
@@ -241,14 +261,19 @@ public class BinarySearchTree<E extends Comparable> {
 //            System.out.println("add value:" + value);
             binarySearchTree.add(value);
         }
-        for (int i = 0; i < 10; i++) {
-            int value = binarySearchTree.getMin();
-            System.out.println("remove:" + value);
-            binarySearchTree.root = binarySearchTree.removeElement(binarySearchTree.root, value);
-//            binarySearchTree.print(binarySearchTree.root);
-            binarySearchTree.printbylayer(binarySearchTree.root);
-        }
+        binarySearchTree.add(9);
+        binarySearchTree.add(6);
+//        for (int i = 0; i < 10; i++) {
+//            int value = binarySearchTree.getMin();
+//            System.out.println("remove:" + value);
+//            binarySearchTree.root = binarySearchTree.removeElement(binarySearchTree.root, value);
+////            binarySearchTree.print(binarySearchTree.root);
+//            binarySearchTree.printbylayer(binarySearchTree.root);
+//        }
 
         binarySearchTree.printbylayer(binarySearchTree.root);
+//        BinarySearchTree<Integer>.Node node = binarySearchTree.successor(binarySearchTree.root, -1);
+//        System.out.println(node.value);
+
     }
 }
